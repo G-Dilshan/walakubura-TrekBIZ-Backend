@@ -3,25 +3,18 @@ spring:
     name: pos-system
 
 # Local Server DB
-  datasource:
-    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:trekbiz}
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: ${DB_USERNAME:root}
-    password: ${DB_PASSWORD:Gan@25453}
-
 #  datasource:
-#    url: jdbc:mysql://${DB_HOST:gondola.proxy.rlwy.net}:${DB_PORT:30459}/${DB_NAME:railway}
-##    url: jdbc:mysql://${DB_HOST:mysql.railway.internal}:${DB_PORT:3306}/${DB_NAME:railway}
+#    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:trekbiz}
 #    driver-class-name: com.mysql.cj.jdbc.Driver
 #    username: ${DB_USERNAME:root}
-#    password: ${DB_PASSWORD:pUzwZYlrKNFyMdWOulYQtJPPiVhobygg}
+#    password: ${DB_PASSWORD:Gan@25453}
 
 # AWS server DB
-#  datasource:
-#    url: jdbc:mysql://${DB_HOST:trekbiz.c7sqgsakmgmp.eu-north-1.rds.amazonaws.com}:${DB_PORT:3306}/${DB_NAME:trekbiz}
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-#    username: ${DB_USERNAME:dilshan}
-#    password: ${DB_PASSWORD:dilshanDBrobotrek}
+  datasource:
+    url: jdbc:mysql://${DB_HOST:trekbiz.c7sqgsakmgmp.eu-north-1.rds.amazonaws.com}:${DB_PORT:3306}/${DB_NAME:trekbiz}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${DB_USERNAME:dilshan}
+    password: ${DB_PASSWORD:dilshanDBrobotrek}
 
   jpa:
     hibernate:
