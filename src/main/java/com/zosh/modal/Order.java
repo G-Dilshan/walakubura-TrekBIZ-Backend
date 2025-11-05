@@ -22,6 +22,9 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
+    private String idempotencyKey;
+
     private Double totalAmount;
 
     private LocalDateTime createdAt;

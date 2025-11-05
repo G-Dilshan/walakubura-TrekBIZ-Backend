@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface OrderRepository extends JpaRepository<Order, Long> {
+    Optional<Order> findByIdempotencyKey(String idempotencyKey);
     List<Order> findByCustomerId(Long customerId);
     List<Order> findByBranchId(Long branchId);
     List<Order> findByCashierId(Long cashierId);

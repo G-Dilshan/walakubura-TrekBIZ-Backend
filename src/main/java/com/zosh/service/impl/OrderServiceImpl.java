@@ -183,6 +183,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -198,8 +199,18 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @Transactional // ADD THIS - Ensures rollback if inventory reduction fails
     public OrderDTO createOrder(OrderDTO dto) throws UserException {
-        User cashier = userService.getCurrentUser();
 
+        // CHECK FOR DUPLICATE
+        if (dto.getIdempotencyKey() != null) {
+            Optional<Order> existingOrder = orderRepository
+                    .findByIdempotencyKey(dto.getIdempotencyKey());
+
+            if (existingOrder.isPresent()) {
+                return OrderMapper.toDto(existingOrder.get());
+            }
+        }
+
+        User cashier = userService.getCurrentUser();
         Branch branch = cashier.getBranch();
 
         if (branch == null) {
@@ -211,6 +222,7 @@ public class OrderServiceImpl implements OrderService {
                 .cashier(cashier)
                 .customer(dto.getCustomer())
                 .paymentType(dto.getPaymentType())
+                .idempotencyKey(dto.getIdempotencyKey()) // ADD THIS
                 .build();
 
         List<OrderItem> orderItems = dto.getItems().stream().map(itemDto -> {

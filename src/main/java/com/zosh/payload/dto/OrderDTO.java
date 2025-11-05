@@ -15,6 +15,7 @@ import java.util.List;
 @Builder
 public class OrderDTO {
     private Long id;
+    private String idempotencyKey; // ADD THIS
     private Double totalAmount;
     private Long branchId;
     private Long cashierId;
